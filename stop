@@ -1,0 +1,66 @@
+[1mdiff --git a/cachematrix.R b/cachematrix.R[m
+[1mindex a50be65..46b4ddc 100644[m
+[1m--- a/cachematrix.R[m
+[1m+++ b/cachematrix.R[m
+[36m@@ -1,15 +1,51 @@[m
+[31m-## Put comments here that give an overall description of what your[m
+[31m-## functions do[m
+[32m+[m[32m## Course 2 > Week 3 > Programming Assignment 2 - Cacheing the Inverse of a Matrix[m[41m [m
+ [m
+[31m-## Write a short comment describing this function[m
+ [m
+[31m-makeCacheMatrix <- function(x = matrix()) {[m
+[32m+[m[32m## This assignment is to write a pair of functions that cache the inverse of a matrix.[m
+ [m
+[31m-}[m
+[32m+[m[32m  ## makeCacheMatrix:[m[41m [m
+[32m+[m[32m  ## This function creates a special "matrix" object that can cache its inverse.[m
+ [m
+[32m+[m[32m    makeCacheMatrix <- function(x = matrix()) {[m
+[32m+[m[32m        inv = NULL[m
+[32m+[m[41m        [m
+[32m+[m[32m      set = function(y) {[m
+[32m+[m[32m        x <<- y[m
+[32m+[m[32m        inv <<- NULL[m
+[32m+[m[32m      }[m
+[32m+[m[41m      [m
+[32m+[m[32m      get = function() x[m
+[32m+[m[32m      setinv = function(inverse) inv <<- inverse[m[41m [m
+[32m+[m[32m      getinv = function() inv[m
+[32m+[m[32m      list(set=set, get=get, setinv=setinv, getinv=getinv)[m
+[32m+[m[32m    }[m
+ [m
+[31m-## Write a short comment describing this function[m
+[32m+[m[32m  ## cacheSolve:[m[41m [m
+[32m+[m[32m  ## This function computes the inverse of the special "matrix" returned by makeCacheMatrix above.[m
+[32m+[m[32m  ## Additionally, If the inverse has already been calculated (and the matrix has not changed),[m[41m [m
+[32m+[m[32m  ## then the cachesolve should retrieve the inverse from the cache.[m[41m [m
+ [m
+[31m-cacheSolve <- function(x, ...) {[m
+[31m-        ## Return a matrix that is the inverse of 'x'[m
+[31m-}[m
+[32m+[m[32m    cacheSolve <- function(x, ...) {[m
+[32m+[m[32m       inv = x$getinv()[m
+[32m+[m[41m       [m
+[32m+[m[32m      if (!is.null(inv)){[m
+[32m+[m[32m        message("getting cached data")[m
+[32m+[m[32m        return(inv)[m
+[32m+[m[32m      }[m
+[32m+[m[41m       [m
+[32m+[m[32m      mat.data = x$get()[m
+[32m+[m[32m      inv = solve(mat.data, ...)[m
+[32m+[m[32m      x$setinv(inv)[m
+[32m+[m[32m      return(inv)[m
+[32m+[m[32m    }[m
+[32m+[m[41m    [m
+[32m+[m[32m  ## Testing[m
+[32m+[m[32m    test <- matrix(c(2,4,6,8),2,2)[m
+[32m+[m[32m    cache_mat <- makeCacheMatrix(test)[m
+[32m+[m[32m    cacheSolve(cache_mat)[m
+[32m+[m[41m    [m
+[32m+[m[32m   ## [,1]  [,2][m
+[32m+[m[32m   ## [1,] -1.0  0.75[m
+[32m+[m[32m   ## [2,]  0.5 -0.25[m
+[32m+[m[41m    [m
+[32m+[m[32m## End Assignment[m
+\ No newline at end of file[m
